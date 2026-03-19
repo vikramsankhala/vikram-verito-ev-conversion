@@ -1,0 +1,15 @@
+# Render Blueprint — Mahindra Verito EV Conversion Website
+# Deploy as Static Site: https://render.com/docs/static-sites
+services:
+  - type: web
+    name: verito-ev-blueprint
+    runtime: static
+    buildCommand: "true"
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: sameorigin
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
