@@ -1,0 +1,9 @@
+{
+  "name": "verito-ev-blueprint",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node api/server.js",
+    "install:api": "cd api && npm install"
+  }
+}

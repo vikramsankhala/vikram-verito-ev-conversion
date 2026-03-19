@@ -15,28 +15,30 @@ A complete technical website for converting the Mahindra Verito 2011 diesel seda
 
 ## Deploy on Render
 
-1. **Push to GitHub** — Create a repo and push this folder (or just the HTML files).
+1. **Push to GitHub** — Create a repo and push this folder.
 
 2. **Connect to Render** — Go to [render.com](https://render.com) → New → Blueprint.
 
 3. **Link repository** — Connect your GitHub repo containing `render.yaml`.
 
-4. **Deploy** — Render will detect the blueprint and deploy the static site. Your site will be live at `https://verito-ev-blueprint.onrender.com` (or your custom domain).
+4. **Add Anthropic API Key** — In Render Dashboard → Environment, add:
+   - **Key:** `ANTHROPIC_API_KEY`
+   - **Value:** Your API key from [console.anthropic.com](https://console.anthropic.com)
 
-### Manual static site setup (without Blueprint)
+5. **Deploy** — Render deploys the Node.js app (static site + AI chat API). Site live at `https://verito-ev-blueprint.onrender.com`.
 
-1. New → Static Site
-2. Connect your repository
-3. **Build Command:** `true` (or leave empty)
-4. **Publish Directory:** `.` (root)
-5. Deploy
+### AI Guide (Optional)
+
+The AI Guide uses Anthropic's Claude. Without `ANTHROPIC_API_KEY`, the chat will show a setup message. Get a key at [console.anthropic.com](https://console.anthropic.com) → API Keys.
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| `verito-ev-blueprint.html` | Main blueprint (all 8 sections) |
+| `verito-ev-blueprint.html` | Main blueprint (all 8 sections + AI Guide) |
 | `index.html` | Redirects to main blueprint |
+| `api/server.js` | Node.js server (static + /api/chat) |
+| `api/blueprint-context.js` | AI system prompt (blueprint knowledge) |
 | `render.yaml` | Render deployment config |
 | `EV_Conversion_YouTube_Videos_Reference.md` | Video URL reference list |
 

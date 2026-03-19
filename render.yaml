@@ -1,11 +1,14 @@
-# Render Blueprint — Mahindra Verito EV Conversion Website
-# Deploy as Static Site: https://render.com/docs/static-sites
+# Render Blueprint — Mahindra Verito EV Conversion Website + AI Guide
+# Node.js serves static site + Anthropic AI chat API
 services:
   - type: web
     name: verito-ev-blueprint
-    runtime: static
-    buildCommand: "true"
-    staticPublishPath: .
+    runtime: node
+    buildCommand: npm install --prefix api
+    startCommand: node api/server.js
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
     headers:
       - path: /*
         name: X-Frame-Options
