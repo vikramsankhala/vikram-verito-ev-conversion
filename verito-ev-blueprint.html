@@ -9,23 +9,221 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap"
     rel="stylesheet">
   <style>
+    /* ===================================
+       THEME INTEGRATION FRAMEWORK
+       =================================== */
+    
+    /* Base Theme Variables - Current Dark Theme */
     :root {
-      --bg: #0a0e14;
-      --bg2: #111720;
-      --bg3: #192130;
-      --panel: #1a2640;
-      --border: rgba(100, 180, 255, 0.12);
-      --border2: rgba(100, 180, 255, 0.25);
-      --accent: #00c9ff;
-      --accent2: #4ade80;
-      --accent3: #f59e0b;
-      --accent4: #f43f5e;
-      --text: #e0eaf8;
-      --muted: #7a9bbf;
-      --dim: #3a5a7a;
-      --orange: #fb923c;
+      /* === SHUFFLE THEME PLACEHOLDERS === */
+      /* These will be replaced with Shuffle.dev theme variables */
+      
+      /* Primary Colors */
+      --theme-primary: #00c9ff;
+      --theme-primary-rgb: 0, 201, 255;
+      --theme-primary-light: #33d4ff;
+      --theme-primary-dark: #0099cc;
+      
+      /* Secondary Colors */
+      --theme-secondary: #4ade80;
+      --theme-secondary-rgb: 74, 222, 128;
+      --theme-accent: #f59e0b;
+      --theme-accent-rgb: 245, 158, 11;
+      --theme-danger: #f43f5e;
+      --theme-danger-rgb: 244, 63, 94;
+      
+      /* Neutral Colors */
+      --theme-white: #ffffff;
+      --theme-black: #000000;
+      --theme-gray-50: #f8fafc;
+      --theme-gray-100: #f1f5f9;
+      --theme-gray-900: #0f172a;
+      
+      /* Background Colors */
+      --bg-primary: #0a0e14;
+      --bg-secondary: #111720;
+      --bg-tertiary: #192130;
+      --bg-card: #1a2640;
+      --bg-overlay: rgba(0, 0, 0, 0.8);
+      
+      /* Text Colors */
+      --text-primary: #e0eaf8;
+      --text-secondary: #7a9bbf;
+      --text-muted: #3a5a7a;
+      --text-inverse: #0a0e14;
+      
+      /* Border Colors */
+      --border-light: rgba(100, 180, 255, 0.12);
+      --border-medium: rgba(100, 180, 255, 0.25);
+      --border-dark: rgba(100, 180, 255, 0.4);
+      
+      /* Typography */
+      --font-family-primary: 'Space Grotesk', sans-serif;
+      --font-family-mono: 'JetBrains Mono', monospace;
+      --font-family-serif: 'Playfair Display', serif;
+      
+      /* Font Sizes */
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.5rem;
+      --text-3xl: 1.875rem;
+      --text-4xl: 2.25rem;
+      
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 4rem;
+      --space-20: 5rem;
+      
+      /* Border Radius */
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      
+      /* Transitions */
+      --transition-fast: 150ms ease;
+      --transition-normal: 250ms ease;
+      --transition-slow: 350ms ease;
+      
+      /* Z-Index Scale */
+      --z-dropdown: 1000;
+      --z-sticky: 1020;
+      --z-fixed: 1030;
+      --z-modal-backdrop: 1040;
+      --z-modal: 1050;
+      --z-popover: 1060;
+      --z-tooltip: 1070;
+      
+      /* Component Specific */
+      --header-height: 70px;
+      --sidebar-width: 280px;
+      --container-max: 1300px;
+    }
+    
+    /* Legacy Variable Mapping - Backward Compatibility */
+    :root {
+      --bg: var(--bg-primary);
+      --bg2: var(--bg-secondary);
+      --bg3: var(--bg-tertiary);
+      --panel: var(--bg-card);
+      --border: var(--border-light);
+      --border2: var(--border-medium);
+      --accent: var(--theme-primary);
+      --accent2: var(--theme-secondary);
+      --accent3: var(--theme-accent);
+      --accent4: var(--theme-danger);
+      --text: var(--text-primary);
+      --muted: var(--text-secondary);
+      --dim: var(--text-muted);
+      --orange: var(--theme-accent);
       --purple: #a78bfa;
       --teal: #2dd4bf;
+    }
+    
+    /* Theme Switching Support */
+    [data-theme="shuffle"] {
+      /* === FLARO THEME - GLASSMORPHISM AESTHETIC === */
+      /* Based on shuffle.dev/preview/f0e0b439... */
+      
+      /* Glassmorphism Background Colors */
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-bg-hover: rgba(255, 255, 255, 0.08);
+      --glass-bg-active: rgba(255, 255, 255, 0.12);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-border-hover: rgba(255, 255, 255, 0.15);
+      
+      /* Flaro Primary Colors */
+      --flaro-primary: #6366f1;
+      --flaro-primary-light: #818cf8;
+      --flaro-primary-dark: #4f46e5;
+      --flaro-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      
+      /* Flaro Accent Colors */
+      --flaro-accent: #f59e0b;
+      --flaro-accent-light: #fbbf24;
+      --flaro-success: #10b981;
+      --flaro-warning: #f59e0b;
+      --flaro-danger: #ef4444;
+      
+      /* Background System */
+      --flaro-bg-primary: #0f172a;
+      --flaro-bg-secondary: #1e293b;
+      --flaro-bg-tertiary: #334155;
+      --flaro-bg-glass: rgba(15, 23, 42, 0.8);
+      --flaro-bg-glass-light: rgba(30, 41, 59, 0.6);
+      
+      /* Text Colors */
+      --flaro-text-primary: #f8fafc;
+      --flaro-text-secondary: #cbd5e1;
+      --flaro-text-muted: #64748b;
+      --flaro-text-inverse: #0f172a;
+      
+      /* Glassmorphism Effects */
+      --flaro-glass-blur: blur(12px);
+      --flaro-glass-blur-light: blur(8px);
+      --flaro-backdrop-filter: blur(16px) saturate(180%);
+      --flaro-shadow-glass: 0 8px 32px rgba(31, 38, 135, 0.37);
+      --flaro-shadow-glass-hover: 0 12px 48px rgba(31, 38, 135, 0.45);
+      
+      /* Override theme variables for Flaro */
+      --theme-primary: var(--flaro-primary);
+      --theme-primary-rgb: 99, 102, 241;
+      --theme-primary-light: var(--flaro-primary-light);
+      --theme-primary-dark: var(--flaro-primary-dark);
+      --theme-secondary: var(--flaro-success);
+      --theme-accent: var(--flaro-accent);
+      --theme-danger: var(--flaro-danger);
+      
+      --bg-primary: var(--flaro-bg-primary);
+      --bg-secondary: var(--flaro-bg-secondary);
+      --bg-tertiary: var(--flaro-bg-tertiary);
+      --bg-card: var(--glass-bg);
+      --bg-overlay: rgba(15, 23, 42, 0.95);
+      
+      --text-primary: var(--flaro-text-primary);
+      --text-secondary: var(--flaro-text-secondary);
+      --text-muted: var(--flaro-text-muted);
+      --text-inverse: var(--flaro-text-inverse);
+      
+      --border-light: var(--glass-border);
+      --border-medium: var(--glass-border-hover);
+      --border-dark: rgba(255, 255, 255, 0.2);
+      
+      --shadow-lg: var(--flaro-shadow-glass);
+      --shadow-xl: var(--flaro-shadow-glass-hover);
+    }
+    
+    [data-theme="shuffle-light"] {
+      /* Light theme variants for Flaro */
+      --flaro-bg-primary: #f8fafc;
+      --flaro-bg-secondary: #f1f5f9;
+      --flaro-bg-tertiary: #e2e8f0;
+      --flaro-bg-glass: rgba(248, 250, 252, 0.8);
+      --flaro-text-primary: #0f172a;
+      --flaro-text-secondary: #334155;
+      --flaro-text-muted: #64748b;
+      --glass-bg: rgba(0, 0, 0, 0.05);
+      --glass-border: rgba(0, 0, 0, 0.1);
     }
 
     * {
@@ -37,10 +235,324 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 15px;
+      font-family: var(--font-family-primary);
+      font-size: var(--text-base);
       line-height: 1.7;
       overflow-x: hidden;
+      transition: background var(--transition-normal), color var(--transition-normal);
+    }
+
+    /* ===================================
+       MODULAR COMPONENT STRUCTURE
+       =================================== */
+    
+    /* Base Components */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-md);
+      font-family: var(--font-family-primary);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    
+    .btn-primary {
+      background: var(--theme-primary);
+      color: var(--theme-white);
+      border-color: var(--theme-primary);
+    }
+    
+    .btn-primary:hover {
+      background: var(--theme-primary-dark);
+      border-color: var(--theme-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--theme-primary);
+      border-color: var(--border-medium);
+    }
+    
+    .btn-outline:hover {
+      background: var(--theme-primary);
+      color: var(--theme-white);
+      border-color: var(--theme-primary);
+    }
+    
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: all var(--transition-normal);
+    }
+    
+    .card:hover {
+      border-color: var(--border-medium);
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-2px);
+    }
+    
+    /* Theme Switcher Component */
+    .theme-switcher {
+      position: fixed;
+      top: var(--space-6);
+      right: var(--space-6);
+      z-index: var(--z-fixed);
+      display: flex;
+      gap: var(--space-2);
+    }
+    
+    .theme-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      border: 2px solid var(--border-medium);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+      font-size: var(--text-sm);
+    }
+    
+    .theme-btn:hover {
+      border-color: var(--theme-primary);
+      transform: scale(1.1);
+    }
+    
+    .theme-btn.active {
+      background: var(--theme-primary);
+      color: var(--theme-white);
+      border-color: var(--theme-primary);
+    }
+    
+    /* Shuffle.dev Integration Classes */
+    .shuffle-component {
+      /* This will be populated with Shuffle.dev component styles */
+    }
+    
+    .shuffle-grid {
+      display: grid;
+      gap: var(--space-6);
+      /* Grid layouts will be customized per Shuffle.dev theme */
+    }
+    
+    .shuffle-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Hero section styling for Shuffle.dev themes */
+    }
+
+    /* ===================================
+       THEME SWITCHING MECHANISM
+       =================================== */
+    
+    .theme-transition * {
+      transition: background-color var(--transition-slow) !important,
+                  color var(--transition-slow) !important,
+                  border-color var(--transition-slow) !important,
+                  box-shadow var(--transition-slow) !important;
+    }
+    
+    /* Theme-specific overrides will be inserted here */
+    .shuffle-theme-variables {
+      /* Placeholder for Shuffle.dev CSS variables */
+    }
+
+    /* ===================================
+       FLARO GLASSMORPHISM COMPONENTS
+       =================================== */
+    
+    /* Flaro Glass Cards */
+    [data-theme="shuffle"] .card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--flaro-shadow-glass);
+    }
+    
+    [data-theme="shuffle"] .card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
+      box-shadow: var(--flaro-shadow-glass-hover);
+      transform: translateY(-4px) scale(1.02);
+    }
+    
+    /* Flaro Buttons */
+    [data-theme="shuffle"] .btn-primary {
+      background: var(--flaro-gradient);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    }
+    
+    [data-theme="shuffle"] .btn-primary:hover {
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    [data-theme="shuffle"] .btn-outline {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      color: var(--flaro-text-primary);
+    }
+    
+    [data-theme="shuffle"] .btn-outline:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--flaro-primary);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+    }
+    
+    /* Flaro Header */
+    [data-theme="shuffle"] header {
+      background: var(--flaro-bg-glass);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    /* Flaro Navigation */
+    [data-theme="shuffle"] nav a {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-normal);
+    }
+    
+    [data-theme="shuffle"] nav a:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--flaro-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+    }
+    
+    /* Flaro Sections */
+    [data-theme="shuffle"] .section-header {
+      background: var(--flaro-bg-glass);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      margin-bottom: var(--space-6);
+    }
+    
+    /* Flaro Donor Cards */
+    [data-theme="shuffle"] .donor-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--flaro-shadow-glass);
+      transition: all var(--transition-normal);
+    }
+    
+    [data-theme="shuffle"] .donor-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
+      box-shadow: var(--flaro-shadow-glass-hover);
+      transform: translateY(-6px) scale(1.03);
+    }
+    
+    [data-theme="shuffle"] .donor-card.preferred {
+      background: linear-gradient(135deg, 
+        rgba(99, 102, 241, 0.1) 0%, 
+        rgba(139, 92, 246, 0.1) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    
+    /* Flaro Tech Cards */
+    [data-theme="shuffle"] .tech-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--flaro-shadow-glass);
+    }
+    
+    [data-theme="shuffle"] .tech-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-4px);
+    }
+    
+    /* Flaro Finance Section */
+    [data-theme="shuffle"] .finance-wrapper {
+      background: var(--flaro-bg-glass);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--flaro-shadow-glass);
+    }
+    
+    [data-theme="shuffle"] .finance-row {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    [data-theme="shuffle"] .finance-row:hover {
+      background: var(--glass-bg-hover);
+    }
+    
+    /* Flaro Sequence Items */
+    [data-theme="shuffle"] .sequence-item {
+      background: var(--glass-bg);
+      backdrop-filter: var(--flaro-backdrop-filter);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--flaro-shadow-glass);
+    }
+    
+    [data-theme="shuffle"] .sequence-item:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
+      transform: translateX(8px);
+    }
+    
+    /* Flaro Theme Switcher */
+    [data-theme="shuffle"] .theme-btn {
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--glass-border);
+    }
+    
+    [data-theme="shuffle"] .theme-btn:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--flaro-primary);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+    }
+    
+    [data-theme="shuffle"] .theme-btn.active {
+      background: var(--flaro-gradient);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+    
+    /* Flaro Background Pattern */
+    [data-theme="shuffle"] body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     /* HEADER */
@@ -1269,6 +1781,624 @@
         bottom: 80px;
       }
     }
+
+    /* ─── ENGINE SWAP SECTION STYLES ─── */
+    .engine-swap-header {
+      background: linear-gradient(135deg, var(--panel), var(--bg3));
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .engine-swap-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .engine-swap-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .donor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .donor-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .donor-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-color: var(--border2);
+    }
+
+    .donor-card.preferred::before {
+      content: 'PREFERRED';
+      position: absolute;
+      top: -1px;
+      right: 16px;
+      background: var(--accent);
+      color: white;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 4px 8px;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .donor-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .donor-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .compatibility-bar {
+      height: 4px;
+      background: var(--bg3);
+      border-radius: 2px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .compatibility-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    .donor-specs {
+      list-style: none;
+      font-size: 13px;
+    }
+
+    .donor-specs li {
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .donor-specs li:last-child {
+      border-bottom: none;
+    }
+
+    .donor-specs li span:last-child {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .compat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .compat-score {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .tech-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .tech-card h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .tech-card ul {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .tech-card ul li {
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .tech-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .tech-card ul li strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .sequence-list {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .sequence-item {
+      counter-increment: steps;
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 20px;
+      margin-bottom: 16px;
+      padding: 24px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: background 0.15s;
+    }
+
+    .sequence-item:hover {
+      background: var(--bg3);
+      border-color: var(--border2);
+    }
+
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--dim);
+      line-height: 1;
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .step-body h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .step-body p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .step-tag {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .tag-critical {
+      background: rgba(244, 63, 94, 0.2);
+      color: var(--accent4);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+
+    .tag-standard {
+      background: rgba(0, 201, 255, 0.2);
+      color: var(--accent);
+      border: 1px solid rgba(0, 201, 255, 0.3);
+    }
+
+    .tag-check {
+      background: rgba(74, 222, 128, 0.2);
+      color: var(--accent2);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+    }
+
+    .yt-links {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .yt-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .yt-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent);
+    }
+
+    .yt-icon {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .finance-wrapper {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin: 24px 0;
+    }
+
+    .finance-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .finance-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .finance-section-head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      text-transform: uppercase;
+      padding: 0 0 8px;
+      margin-top: 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 12px;
+    }
+
+    .finance-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 16px 24px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+
+    .finance-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .fin-item {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .fin-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .fin-low {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .fin-high {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .fin-col-heads {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 16px 24px;
+      padding: 8px 0 6px;
+    }
+
+    .fin-col-head {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .fin-col-head:first-child {
+      text-align: left;
+    }
+
+    .subtotal-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 16px 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+      margin: 8px 0 16px;
+      background: var(--bg3);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .subtotal-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--accent3);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .subtotal-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent3);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .grand-total {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      margin-top: 24px;
+      border-radius: 12px;
+    }
+
+    .gt-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: white;
+    }
+
+    .gt-range {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: white;
+      text-align: right;
+    }
+
+    .gt-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0;
+    }
+
+    .note-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .note-card h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .note-card p,
+    .note-card ul {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .note-card ul {
+      list-style: none;
+    }
+
+    .note-card ul li {
+      padding: 6px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .note-card ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .sourcing-block {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      margin: 24px 0;
+    }
+
+    .sourcing-block h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .source-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .source-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      color: white;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .source-text strong {
+      display: block;
+      font-size: 14px;
+      color: var(--text);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .source-text span {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .intro-block {
+      background: var(--panel);
+      border-left: 4px solid var(--accent);
+      padding: 24px;
+      margin: 24px 0;
+      font-size: 14px;
+      line-height: 1.7;
+      border-radius: 0 8px 8px 0;
+      border: 1px solid var(--border);
+    }
+
+    .intro-block strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .address-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 768px) {
+      .donor-grid,
+      .tech-grid,
+      .notes-grid,
+      .sourcing-block {
+        grid-template-columns: 1fr;
+      }
+
+      .finance-wrapper {
+        padding: 20px;
+      }
+
+      .sequence-item {
+        grid-template-columns: 50px 1fr;
+        gap: 16px;
+        padding: 20px;
+      }
+
+      .step-num {
+        font-size: 28px;
+      }
+
+      .grand-total {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 16px;
+      }
+
+      .gt-range {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
@@ -1292,6 +2422,7 @@
         <a href="#wiring">Wiring</a>
         <a href="#steps">Build Steps</a>
         <a href="#videos">Videos</a>
+        <a href="#engine-swap">Engine Swap</a>
         <a href="#jeep-build">Jeep Build</a>
         <a href="#splendour">Splendour</a>
         <a href="#splendour-kit">Splendour Kit</a>
@@ -3032,6 +4163,557 @@
       </div>
     </section>
 
+    <!-- MAHINDRA VERITO — K9K ENGINE SWAP -->
+    <section id="engine-swap" class="reveal">
+      <div class="section-header">
+        <span class="section-num">🔧</span>
+        <h2 class="section-title">Mahindra Verito — K9K Engine Swap</h2>
+        <span class="section-sub">Complete technical & financial report for Renault 1.5 dCi donor engine replacement</span>
+      </div>
+
+      <!-- CLIENT BRIEF -->
+      <div class="intro-block">
+        <strong>Vikram Sankhala</strong> of 12/801, NRI Complex, Nerul, Navi Mumbai requires a complete engine and mounting swap for his <strong>Mahindra Verito</strong>. The 2011 Renault K9K engine requires replacement while all other systems — bodywork, transmission, suspension, electricals — remain in excellent condition. The objective is to source a compatible, tested, and warranted K9K 85 PS donor unit at fair market price, with professional installation in Navi Mumbai / Mumbai.
+        <div class="address-line">REF: Mahindra Verito | 2011 Renault K9K | Engine & Mounting Replacement | March 2026</div>
+      </div>
+
+      <!-- SECTION 1: DONOR CANDIDATES -->
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Compatible Donor Vehicles</h2>
+      </div>
+
+      <div class="donor-grid">
+        <!-- DUSTER -->
+        <div class="donor-card preferred">
+          <div class="donor-name">Renault Duster</div>
+          <div class="donor-sub">GEN 1 · K9K 85 PS · PREFERRED DONOR</div>
+          <div class="compat-label">ENGINE COMPATIBILITY</div>
+          <div class="compatibility-bar"><div class="compatibility-fill" style="width:97%"></div></div>
+          <div class="compat-score">97%</div>
+          <ul class="donor-specs">
+            <li><span>Engine Code</span><span>K9K 1.5 dCi</span></li>
+            <li><span>Output</span><span>85 PS / 200 Nm</span></li>
+            <li><span>Fuel System</span><span>Common Rail Direct</span></li>
+            <li><span>Mount Compatibility</span><span>Direct / Near-Direct</span></li>
+            <li><span>ECU Cross-match</span><span>High</span></li>
+            <li><span>Market Availability</span><span>Good (Kurla)</span></li>
+            <li><span>Warranty (Dealer)</span><span>Available</span></li>
+          </ul>
+        </div>
+
+        <!-- LOGAN -->
+        <div class="donor-card">
+          <div class="donor-name">Renault Logan</div>
+          <div class="donor-sub">K9K FAMILY · VERITO SIBLING</div>
+          <div class="compat-label">ENGINE COMPATIBILITY</div>
+          <div class="compatibility-bar"><div class="compatibility-fill" style="width:92%"></div></div>
+          <div class="compat-score">92%</div>
+          <ul class="donor-specs">
+            <li><span>Engine Code</span><span>K9K 1.5 dCi</span></li>
+            <li><span>Output</span><span>65–85 PS</span></li>
+            <li><span>Fuel System</span><span>Common Rail Direct</span></li>
+            <li><span>Mount Compatibility</span><span>Very High (same platform)</span></li>
+            <li><span>ECU Cross-match</span><span>Very High</span></li>
+            <li><span>Market Availability</span><span>Moderate</span></li>
+            <li><span>Warranty (Dealer)</span><span>Subject to unit</span></li>
+          </ul>
+        </div>
+
+        <!-- SUNNY / SCALA -->
+        <div class="donor-card">
+          <div class="donor-name">Nissan Sunny / Scala</div>
+          <div class="donor-sub">K9K FAMILY · RENAULT-NISSAN ALLIANCE</div>
+          <div class="compat-label">ENGINE COMPATIBILITY</div>
+          <div class="compatibility-bar"><div class="compatibility-fill" style="width:82%"></div></div>
+          <div class="compat-score">82%</div>
+          <ul class="donor-specs">
+            <li><span>Engine Code</span><span>K9K 1.5 dCi</span></li>
+            <li><span>Output</span><span>85 PS</span></li>
+            <li><span>Fuel System</span><span>Common Rail Direct</span></li>
+            <li><span>Mount Compatibility</span><span>Good (minor adapt.)</span></li>
+            <li><span>ECU Cross-match</span><span>Moderate</span></li>
+            <li><span>Market Availability</span><span>Good</span></li>
+            <li><span>Warranty (Dealer)</span><span>Available</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SECTION 2: TECHNICAL NOTES -->
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Technical Considerations</h2>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <h4>Why K9K is the Right Choice</h4>
+          <ul>
+            <li>The Mahindra Verito is a <strong>rebadged Renault Logan</strong> — it originally uses the K9K engine family, making this a like-for-like architectural swap.</li>
+            <li>The K9K 1.5 dCi 85 PS is the <strong>most widely available</strong> variant in Kurla donor markets.</li>
+            <li><strong>Engine mounts are likely reusable</strong> or require minimal adaptation for Duster/Logan donors.</li>
+            <li>Common rail fuel system and ECU mapping are <strong>compatible with existing wiring harness</strong>.</li>
+            <li>Gearbox remains unchanged — only engine and mounting components require replacement.</li>
+          </ul>
+        </div>
+
+        <div class="tech-card">
+          <h4>Mandatory Work at Swap Time</h4>
+          <ul>
+            <li><strong>Timing belt & tensioner</strong> must be replaced fresh — this is non-negotiable regardless of donor mileage.</li>
+            <li><strong>Engine oil & filter</strong> (5W-30, 4 litres) must be fresh-filled before first start.</li>
+            <li><strong>Coolant flush</strong> and hose inspection required; replace any degraded hoses.</li>
+            <li><strong>Gasket and seal set</strong> to be fitted during engine installation.</li>
+            <li>ECU / sensor reconnection should be followed by <strong>diagnostic scan</strong> to clear codes.</li>
+            <li><strong>Test drive and road tuning</strong> to confirm normal operation before handover.</li>
+          </ul>
+        </div>
+
+        <div class="tech-card">
+          <h4>Sourcing Criteria — Kurla Stall</h4>
+          <ul>
+            <li>Request a <strong>dealer-guaranteed, tested unit</strong> with documented mileage if possible.</li>
+            <li>Insist on a minimum <strong>30-day parts warranty</strong> from the Kurla dealer stall.</li>
+            <li>Verify the unit visually — check for <strong>no cracks, rust, or oil sludge</strong> before purchase.</li>
+            <li>Ask for the <strong>donor car registration number</strong> for traceability.</li>
+            <li>Prefer Duster Gen 1 units; Logan units are equally acceptable.</li>
+          </ul>
+        </div>
+
+        <div class="tech-card">
+          <h4>What Does NOT Need Replacement</h4>
+          <ul>
+            <li><strong>Gearbox / transmission</strong> — remains in place, reconnected after swap.</li>
+            <li><strong>Body panels, suspension, brakes</strong> — reported in excellent condition.</li>
+            <li><strong>Electrical system / wiring harness</strong> — compatible, no replacement needed.</li>
+            <li><strong>Fuel tank, fuel lines</strong> — no change required.</li>
+            <li><strong>Exhaust system</strong> — inspect flanges; likely reusable.</li>
+            <li><strong>AC compressor</strong> — transfer from existing engine if serviceable.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SECTION 3: WORK SEQUENCE -->
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Recommended Work Sequence</h2>
+      </div>
+
+      <ol class="sequence-list">
+
+        <!-- STEP 01 -->
+        <li class="sequence-item">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h5>Source &amp; Inspect Donor Engine (Kurla)</h5>
+            <p>Visit Kurla dealer stall. Inspect K9K 85 PS unit from Duster Gen 1 or Logan. Confirm no cracks, minimal sludge, compression test if possible. Secure with 30-day dealer warranty. Negotiate price within ₹45,000–₹50,000 band.</p>
+            <span class="step-tag tag-critical">Critical Step</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=how+to+inspect+used+diesel+engine+before+buying" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                How to inspect a used diesel engine before buying
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=K9K+1.5+dci+engine+inspection+second+hand" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                K9K 1.5 dCi used engine inspection
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=diesel+engine+compression+test+before+purchase" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Diesel engine compression test — buyer's guide
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 02 -->
+        <li class="sequence-item">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h5>Source Consumables &amp; Hardware</h5>
+            <p>Purchase fresh timing belt + tensioner kit, engine oil (5W-30, 4L), coolant, hose set, gasket &amp; seal set. These should be OEM or equivalent quality parts — not aftermarket economy grade.</p>
+            <span class="step-tag tag-standard">Procurement</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+1.5+dCi+K9K+timing+belt+kit+parts" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                K9K timing belt kit — parts identification
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=OEM+vs+aftermarket+engine+parts+diesel" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                OEM vs aftermarket diesel engine parts
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 03 -->
+        <li class="sequence-item">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h5>Engine Removal — Existing Unit</h5>
+            <p>Drain fluids. Disconnect ECU connectors, fuel lines, coolant hoses, exhaust flange, AC compressor. Detach gearbox. Remove engine mounts. Lift out existing K9K unit.</p>
+            <span class="step-tag tag-standard">Workshop</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+Logan+1.5+dCi+engine+removal" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault Logan 1.5 dCi engine removal
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Dacia+Duster+K9K+engine+removal" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Dacia Duster K9K engine removal
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Mahindra+Verito+engine+removal+diesel" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Mahindra Verito engine removal
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 04 -->
+        <li class="sequence-item">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <h5>Timing Belt Replacement on Donor Unit</h5>
+            <p>Before installation, fit the fresh timing belt and tensioner kit on the donor engine. This is the most cost-effective moment to do this work — avoids future engine-out labour.</p>
+            <span class="step-tag tag-critical">Mandatory</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+1.5+dCi+K9K+timing+belt+replacement" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault K9K 1.5 dCi timing belt replacement
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Dacia+Duster+1.5+dCi+timing+belt+change" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Dacia Duster 1.5 dCi timing belt change
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=K9K+timing+belt+tensioner+replacement+step+by+step" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                K9K timing belt + tensioner step-by-step
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 05 -->
+        <li class="sequence-item">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <h5>Engine Installation &amp; Mount Fitting</h5>
+            <p>Lower donor engine into bay. Fit mounts (reuse existing if undamaged, replace if worn). Reconnect gearbox, exhaust flange, fuel lines, coolant hoses, and all ECU sensor connectors.</p>
+            <span class="step-tag tag-standard">Workshop</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+Logan+engine+installation+swap" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault Logan K9K engine installation
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=diesel+engine+mount+replacement+fitting" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Diesel engine mount replacement
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Duster+Dacia+engine+swap+install" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Dacia Duster engine swap install
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 06 -->
+        <li class="sequence-item">
+          <div class="step-num">06</div>
+          <div class="step-body">
+            <h5>Fluid Fill &amp; Pre-Start Check</h5>
+            <p>Fill engine oil (5W-30, 4L), coolant. Check all connections and fittings. Verify no loose wiring or hoses. Prime fuel system before first start.</p>
+            <span class="step-tag tag-standard">Pre-Start</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=diesel+engine+first+start+after+swap+pre+check" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Diesel engine pre-start check after swap
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=how+to+prime+diesel+fuel+system+after+engine+change" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                How to prime diesel fuel system after engine change
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+Duster+engine+oil+coolant+fill" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault Duster oil &amp; coolant fill guide
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 07 -->
+        <li class="sequence-item">
+          <div class="step-num">07</div>
+          <div class="step-body">
+            <h5>ECU / Sensor Reconnection &amp; Diagnostic Scan</h5>
+            <p>Connect diagnostic tool (OBD2 scanner) and clear all fault codes. Verify all sensor readings are within normal range. Check for check-engine lights.</p>
+            <span class="step-tag tag-check">Quality Check</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=OBD2+diagnostic+scan+clear+fault+codes+diesel" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                OBD2 diagnostic scan &amp; fault code clearing
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+ECU+sensor+reconnection+after+engine+swap" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault ECU reconnection after engine swap
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+Duster+Logan+check+engine+light+diagnosis" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault Logan / Duster check engine diagnosis
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <!-- STEP 08 -->
+        <li class="sequence-item">
+          <div class="step-num">08</div>
+          <div class="step-body">
+            <h5>Test Drive &amp; Tuning</h5>
+            <p>Road test for minimum 10–15 km. Monitor temperature, oil pressure, smoke, and noise. Check gear engagement. Fine-tune idle if needed. Verify no leaks after drive.</p>
+            <span class="step-tag tag-check">Final Sign-Off</span>
+            <div class="yt-links">
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=post+engine+swap+test+drive+what+to+check" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Post engine swap test drive — what to check
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=Renault+1.5+dCi+diesel+idle+smooth+tuning" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Renault 1.5 dCi idle &amp; performance check
+              </a>
+              <a class="yt-link" href="https://www.youtube.com/results?search_query=diesel+engine+oil+leak+check+after+installation" target="_blank">
+                <svg class="yt-icon" viewBox="0 0 24 24" fill="#cc2200"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+                Post-installation oil leak &amp; coolant check
+              </a>
+            </div>
+          </div>
+        </li>
+
+      </ol>
+
+      <!-- SECTION 4: FINANCIAL ESTIMATE -->
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Financial Estimate</h2>
+      </div>
+
+      <div class="finance-wrapper">
+        <div class="finance-title">COST BREAKDOWN</div>
+
+        <!-- PART A -->
+        <div class="finance-section-head">A — PARTS & SOURCING (Kurla Dealer Stall)</div>
+        <div class="fin-col-heads">
+          <div class="fin-col-head">Item</div>
+          <div class="fin-col-head">Low</div>
+          <div class="fin-col-head">High</div>
+        </div>
+
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">K9K 1.5 dCi Donor Engine</div>
+            <div class="fin-note">Tested & guaranteed dealer unit — Duster / Logan / Sunny, Kurla stall with warranty</div>
+          </div>
+          <div class="fin-low">₹45,000</div>
+          <div class="fin-high">₹50,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Engine Mounts (pair)</div>
+            <div class="fin-note">Same K9K family — likely reusable; cost if replacement needed</div>
+          </div>
+          <div class="fin-low">₹1,500</div>
+          <div class="fin-high">₹3,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Timing Belt + Tensioner Kit</div>
+            <div class="fin-note">Mandatory fresh replacement at time of swap</div>
+          </div>
+          <div class="fin-low">₹2,500</div>
+          <div class="fin-high">₹4,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Engine Oil + Filter</div>
+            <div class="fin-note">5W-30, 4 litres</div>
+          </div>
+          <div class="fin-low">₹800</div>
+          <div class="fin-high">₹1,200</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Coolant + Hoses</div>
+            <div class="fin-note">As required upon inspection</div>
+          </div>
+          <div class="fin-low">₹600</div>
+          <div class="fin-high">₹1,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Gaskets & Seals Set</div>
+            <div class="fin-note">Full set for engine installation</div>
+          </div>
+          <div class="fin-low">₹800</div>
+          <div class="fin-high">₹1,500</div>
+        </div>
+
+        <div class="subtotal-row">
+          <div class="subtotal-label">PARTS SUBTOTAL</div>
+          <div class="subtotal-val">₹51,200</div>
+          <div class="subtotal-val">₹60,700</div>
+        </div>
+
+        <!-- PART B -->
+        <div class="finance-section-head">B — LABOUR & SERVICE CHARGES</div>
+        <div class="fin-col-heads">
+          <div class="fin-col-head">Item</div>
+          <div class="fin-col-head">Low</div>
+          <div class="fin-col-head">High</div>
+        </div>
+
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Engine Removal & Installation</div>
+            <div class="fin-note">Incl. gearbox disconnect & reconnect</div>
+          </div>
+          <div class="fin-low">₹8,000</div>
+          <div class="fin-high">₹14,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Timing Belt Fitting (Labour)</div>
+            <div class="fin-note">Included if done at swap time — minimal additional charge</div>
+          </div>
+          <div class="fin-low">₹500</div>
+          <div class="fin-high">₹1,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">ECU / Sensor Reconnection & Diagnostic</div>
+            <div class="fin-note">OBD scan, fault code clearance, sensor verification</div>
+          </div>
+          <div class="fin-low">₹1,000</div>
+          <div class="fin-high">₹2,000</div>
+        </div>
+        <div class="finance-row">
+          <div>
+            <div class="fin-item">Test Drive & Tuning</div>
+            <div class="fin-note">Road test, final adjustment, handover check</div>
+          </div>
+          <div class="fin-low">₹500</div>
+          <div class="fin-high">₹1,000</div>
+        </div>
+
+        <div class="subtotal-row">
+          <div class="subtotal-label">LABOUR SUBTOTAL</div>
+          <div class="subtotal-val">₹10,000</div>
+          <div class="subtotal-val">₹18,000</div>
+        </div>
+
+        <!-- GRAND TOTAL -->
+        <div class="grand-total">
+          <div>
+            <div class="gt-label">ESTIMATED TOTAL (ALL-IN)</div>
+            <div class="gt-sub">Parts + Labour · No discounts applied · Fair market rate</div>
+          </div>
+          <div>
+            <div class="gt-range">₹61,200 – ₹78,700</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: SOURCING NOTES -->
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Sourcing & Workshop Notes</h2>
+      </div>
+
+      <div class="sourcing-block">
+        <div>
+          <h5>Recommended Sourcing Locations</h5>
+          <div class="source-item">
+            <div class="source-icon">KRL</div>
+            <div class="source-text">
+              <strong>Kurla Spare Parts Stalls</strong>
+              <span>Primary source for K9K donor engine. Dealer-grade units with short warranty available. Negotiate price within ₹45,000–₹50,000. Verify with compression test if possible.</span>
+            </div>
+          </div>
+          <div class="source-item">
+            <div class="source-icon">NMB</div>
+            <div class="source-text">
+              <strong>Navi Mumbai Local Workshops</strong>
+              <span>Nerul / Vashi area has several diesel specialists familiar with K9K platform. Recommend choosing a workshop with demonstrable K9K experience.</span>
+            </div>
+          </div>
+          <div class="source-item">
+            <div class="source-icon">OEM</div>
+            <div class="source-text">
+              <strong>Renault / Mahindra Authorised Parts</strong>
+              <span>For timing belt kit, gasket set, and consumables — prefer genuine or Dayco/Gates brand over no-brand alternatives.</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h5>Client Expectations & Fair Dealing</h5>
+          <ul style="list-style:none; font-size:14px; color:var(--steel);">
+            <li style="padding:7px 0; border-bottom:1px solid var(--border);">Client has requested <strong style="color:var(--ink);">fair price and good quality</strong> — no discounts sought, no inflated margins justified.</li>
+            <li style="padding:7px 0; border-bottom:1px solid var(--border);">All parts should be <strong style="color:var(--ink);">itemised with receipts</strong> at handover.</li>
+            <li style="padding:7px 0; border-bottom:1px solid var(--border);">Workshop should provide a <strong style="color:var(--ink);">minimum 30-day / 1,000 km warranty</strong> on the swap work.</li>
+            <li style="padding:7px 0; border-bottom:1px solid var(--border);">Donor engine should carry its own dealer warranty separately.</li>
+            <li style="padding:7px 0;">Vehicle should be returned with <strong style="color:var(--ink);">zero fault codes</strong> on OBD scan at handover.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SECTION 6: IMPORTANT NOTES -->
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="section-title">Important Notes & Risk Flags</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="note-card">
+          <h5>Price Variability Factors</h5>
+          <ul>
+            <li>Donor engine mileage and condition can shift engine cost by ₹3,000–₹8,000.</li>
+            <li>If engine mounts show wear and need replacement, add ₹1,500–₹3,000.</li>
+            <li>Discovery of additional worn components (water pump, thermostat) during disassembly may add ₹1,500–₹3,000.</li>
+            <li>Labour rates vary significantly between Navi Mumbai workshops — get 2–3 quotes.</li>
+            <li>Duster Gen 1 units command a slight premium over Logan at Kurla; both are acceptable.</li>
+          </ul>
+        </div>
+
+        <div class="note-card">
+          <h5>What to Insist Upon</h5>
+          <ul>
+            <li>Itemised receipt for the donor engine with dealer's name and contact.</li>
+            <li>Used timing belt (old) returned to client as proof of replacement.</li>
+            <li>OBD diagnostic printout at handover showing zero active fault codes.</li>
+            <li>Test drive in client's presence before final payment.</li>
+            <li>Written warranty from workshop (even if informal).</li>
+          </ul>
+        </div>
+
+        <div class="note-card">
+          <h5>Technical Caution Points</h5>
+          <ul>
+            <li>Do not accept a swap where the timing belt is not replaced fresh — this is the single highest risk item on a K9K engine.</li>
+            <li>Ensure the engine number is recorded and communicated to your insurance company post-swap (may affect policy).</li>
+            <li>Run engine at idle for 10+ minutes before test drive — monitor temperature and oil pressure carefully.</li>
+            <li>If ECU errors persist after reconnection, a K9K-specialist diagnostic session may be needed.</li>
+          </ul>
+        </div>
+
+        <div class="note-card">
+          <h5>Summary — Client's Position</h5>
+          <p>
+            Vikram Sankhala's request is technically straightforward — the Mahindra Verito is architecturally a Renault Logan, and the K9K engine is the factory-fitted unit. This is a <em>same-family engine swap</em>, not a conversion. The budget estimate of <strong>₹61,200–₹78,700</strong> is fair and realistic for the Mumbai market as of 2026, assuming a dealer-grade Kurla stall unit and a competent local diesel workshop. No unusual risk factors are present.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
     <!-- FIRECRACKER RED JEEP BUILD — Design, Procurement, Assembly, Budget & Technical Blueprint -->
     <section id="jeep-build" class="reveal">
       <div class="section-header">
@@ -3692,7 +5374,7 @@
     <!-- SECTION 7: BUDGET -->
     <section id="budget" class="reveal">
       <div class="section-header">
-        <span class="section-num">07</span>
+        <span class="section-num">08</span>
         <h2 class="section-title">Estimated Project Budget</h2>
         <span class="section-sub">Indian pricing — approximate 2024–25 rates</span>
       </div>
@@ -3826,7 +5508,7 @@
     <!-- SECTION 8: SAFETY -->
     <section id="safety" class="reveal">
       <div class="section-header">
-        <span class="section-num">08</span>
+        <span class="section-num">09</span>
         <h2 class="section-title">Safety Requirements</h2>
         <span class="section-sub">Critical before, during, and after conversion</span>
       </div>
@@ -4025,6 +5707,143 @@
         return d.innerHTML;
       }
     })();
+
+    // ===================================
+    // THEME SWITCHING FUNCTIONALITY
+    // ===================================
+    
+    class ThemeManager {
+      constructor() {
+        this.currentTheme = 'current';
+        this.themes = {
+          current: {
+            name: 'Current Dark',
+            icon: '🌙'
+          },
+          shuffle: {
+            name: 'Flaro Glassmorphism',
+            icon: '🎨',
+            // These will be populated with Shuffle.dev theme data
+            cssVariables: {},
+            customStyles: ''
+          }
+        };
+        this.init();
+      }
+      
+      init() {
+        this.loadSavedTheme();
+        this.createThemeSwitcher();
+        this.setupEventListeners();
+      }
+      
+      loadSavedTheme() {
+        const saved = localStorage.getItem('verito-theme');
+        if (saved && this.themes[saved]) {
+          this.switchTheme(saved);
+        }
+      }
+      
+      createThemeSwitcher() {
+        const switcher = document.createElement('div');
+        switcher.className = 'theme-switcher';
+        switcher.innerHTML = `
+          <button class="theme-btn active" data-theme="current" title="Current Dark Theme">
+            🌙
+          </button>
+          <button class="theme-btn" data-theme="shuffle" title="Flaro Glassmorphism Theme">
+            🎨
+          </button>
+        `;
+        document.body.appendChild(switcher);
+      }
+      
+      setupEventListeners() {
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const theme = e.target.dataset.theme;
+            this.switchTheme(theme);
+          });
+        });
+      }
+      
+      switchTheme(themeName) {
+        if (!this.themes[themeName]) return;
+        
+        // Add transition class
+        document.body.classList.add('theme-transition');
+        
+        // Update active button
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.theme === themeName);
+        });
+        
+        // Apply theme
+        if (themeName === 'shuffle') {
+          this.applyShuffleTheme();
+        } else {
+          this.applyCurrentTheme();
+        }
+        
+        // Save preference
+        localStorage.setItem('verito-theme', themeName);
+        this.currentTheme = themeName;
+        
+        // Remove transition class after animation
+        setTimeout(() => {
+          document.body.classList.remove('theme-transition');
+        }, 350);
+      }
+      
+      applyShuffleTheme() {
+        // This will be populated with Shuffle.dev theme application logic
+        document.documentElement.setAttribute('data-theme', 'shuffle');
+        
+        // Placeholder for Shuffle.dev CSS injection
+        if (!document.getElementById('shuffle-theme-styles')) {
+          const style = document.createElement('style');
+          style.id = 'shuffle-theme-styles';
+          style.textContent = `
+            /* Shuffle.dev theme styles will be injected here */
+            [data-theme="shuffle"] {
+              --theme-primary: /* Shuffle primary color */;
+              --bg-primary: /* Shuffle background color */;
+              /* ... other Shuffle variables */
+            }
+          `;
+          document.head.appendChild(style);
+        }
+      }
+      
+      applyCurrentTheme() {
+        document.documentElement.removeAttribute('data-theme');
+      }
+      
+      // Method to load Shuffle.dev theme data
+      loadShuffleTheme(themeData) {
+        this.themes.shuffle.cssVariables = themeData.variables || {};
+        this.themes.shuffle.customStyles = themeData.styles || '';
+        
+        // Update the CSS injection
+        const styleElement = document.getElementById('shuffle-theme-styles');
+        if (styleElement && themeData.styles) {
+          styleElement.textContent = themeData.styles;
+        }
+      }
+    }
+    
+    // Initialize theme manager when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      new ThemeManager();
+    });
+    
+    // Global function for external theme loading
+    window.loadShuffleTheme = function(themeData) {
+      const themeManager = window.themeManager;
+      if (themeManager) {
+        themeManager.loadShuffleTheme(themeData);
+      }
+    };
   </script>
 </body>
 
